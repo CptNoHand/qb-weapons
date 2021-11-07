@@ -4,16 +4,17 @@ Config.DurabilityBlockedWeapons = {
     "weapon_stungun",
     "weapon_nightstick",
     "weapon_flashlight",
-    "weapon_unarmed",
+    "weapon_crowbar",
+    "weapon_bat",
 }
 
 Config.DurabilityMultiplier = {
 	-- Melee
 	-- ['weapon_unarmed'] 				 = 0.15,
 	['weapon_dagger'] 				 = 0.15,
-	['weapon_bat'] 				 	 = 0.15,
+	--['weapon_bat'] 				 	 = 0.15,
 	['weapon_bottle'] 				 = 0.15,
-	['weapon_crowbar'] 				 = 0.15,
+	--['weapon_crowbar'] 				 = 0.15,
 	-- ['weapon_flashlight'] 			 = 0.15,
 	['weapon_golfclub'] 			 = 0.15,
 	['weapon_hammer'] 				 = 0.15,
