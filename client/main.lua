@@ -251,3 +251,25 @@ CreateThread(function()
         Wait(3)
     end
 end)
+
+RegisterNetEvent('qb-weapons:client:scratch', function()
+    local ped = PlayerPedId()
+    local weapon = GetSelectedPedWeapon(ped)
+    local weaponammo = GetAmmoInPedWeapon(ped, weapon)
+    if weapon == `WEAPON_UNARMED` then
+        QBCore.Functions.Notify('You dont have a weapon in your hands..', 'error')
+    else
+        TaskStartScenarioInPlace(ped, 'PROP_HUMAN_PARKING_METER')
+        QBCore.Functions.Progressbar("search_register", "Scratching Serial Numbers..", math.random(500,500) , false, true, {
+            disableMovement = true,
+            disableCarMovement = true,
+            disableMouse = false,
+            disableCombat = true,
+          }, {}, {}, {}, function() -- Done
+            ClearPedTasks(ped)
+            TriggerServerEvent('qb-weapons:server:scratch', weapon, weaponammo)
+          end, function()
+            ClearPedTasks(ped)
+          end) -- Cancel
+    end
+end)
