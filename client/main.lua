@@ -1,6 +1,7 @@
 -- Variables
 local QBCore = exports['qb-core']:GetCoreObject()
-local PlayerData, CurrentWeaponData, CanShoot, MultiplierAmount = {}, {}, true, 0
+local PlayerData = QBCore.Functions.GetPlayerData()
+local CurrentWeaponData, CanShoot, MultiplierAmount = {}, true, 0
 
 -- Handlers
 
@@ -15,7 +16,7 @@ AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
 end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
-    for k, v in pairs(Config.WeaponRepairPoints) do
+    for k in pairs(Config.WeaponRepairPoints) do
         Config.WeaponRepairPoints[k].IsRepairing = false
         Config.WeaponRepairPoints[k].RepairingData = {}
     end
@@ -79,9 +80,9 @@ RegisterNetEvent('weapon:client:AddAmmo', function(type, amount, itemData)
     if CurrentWeaponData then
         if QBCore.Shared.Weapons[weapon]["name"] ~= "weapon_unarmed" and QBCore.Shared.Weapons[weapon]["ammotype"] == type:upper() then
             local total = GetAmmoInPedWeapon(ped, weapon)
-            local found, maxAmmo = GetMaxAmmo(ped, weapon)
+            local _, maxAmmo = GetMaxAmmo(ped, weapon)
             if total < maxAmmo then
-                QBCore.Functions.Progressbar("taking_bullets", Lang:t('info.loading_bullets'), math.random(4000, 6000), false, true, {
+                QBCore.Functions.Progressbar("taking_bullets", Lang:t('info.loading_bullets'), Config.ReloadTime, false, true, {
                     disableMovement = false,
                     disableCarMovement = false,
                     disableMouse = false,
@@ -89,7 +90,7 @@ RegisterNetEvent('weapon:client:AddAmmo', function(type, amount, itemData)
                 }, {}, {}, {}, function() -- Done
                     if QBCore.Shared.Weapons[weapon] then
                         AddAmmoToPed(ped,weapon,amount)
-                        TaskReloadWeapon(ped)
+                        MakePedReload(ped)
                         TriggerServerEvent("weapons:server:AddWeaponAmmo", CurrentWeaponData, total + amount)
                         TriggerServerEvent('QBCore:Server:RemoveItem', itemData.name, 1, itemData.slot)
                         TriggerEvent('inventory:client:ItemBox', QBCore.Shared.Items[itemData.name], "remove")

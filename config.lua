@@ -1,5 +1,7 @@
 Config = Config or {}
 
+Config.ReloadTime = math.random(4000, 6000)
+
 Config.DurabilityBlockedWeapons = {
     "weapon_stungun",
     "weapon_nightstick",
@@ -93,7 +95,7 @@ Config.DurabilityMultiplier = {
     ['weapon_heavyrifle']           = 0.15,
 
 	-- Light Machine Guns
-	['weapon_mg'] 				    = 0.15, 
+	['weapon_mg'] 				    = 0.15,
 	['weapon_combatmg'] 			= 0.15,
 	['weapon_gusenberg'] 			= 0.15,
 	['weapon_combatmg_mk2'] 		= 0.15,
@@ -151,6 +153,7 @@ Config.WeaponRepairCosts = {
     ["mg"] = 4000,
     ["rifle"] = 5000,
     ["sniper"] = 7000,
+    ["shotgun"] = 6000
 }
 
 WeaponAttachments = {
@@ -254,7 +257,7 @@ WeaponAttachments = {
     ['WEAPON_REVOLVER'] = {
         ['defaultclip'] = {
             component = 'COMPONENT_REVOLVER_CLIP_01',
-            item = 'revovler_defaultclip',
+            item = 'revolver_defaultclip',
         },
         ['vipvariant'] = {
             component = 'COMPONENT_REVOLVER_VARMOD_GOON',
