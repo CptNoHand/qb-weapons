@@ -10,6 +10,19 @@ Config.DurabilityBlockedWeapons = {
     "weapon_bat",
 }
 
+Config.Throwables = {
+    "ball",
+    "bzgas",
+    "flare",
+    "grenade",
+    "molotov",
+    "pipebomb",
+    "proxmine",
+    "smokegrenade",
+    "snowball",
+    "stickybomb",
+}
+
 Config.DurabilityMultiplier = {
 	-- Melee
 	-- ['weapon_unarmed'] 				 = 0.15,
@@ -897,3 +910,9 @@ WeaponAttachments = {
         },
     },
 }
+
+local function getConfigWeaponAttachments(weapon)
+    return WeaponAttachments[weapon]
+end
+
+exports('getConfigWeaponAttachments', getConfigWeaponAttachments)
